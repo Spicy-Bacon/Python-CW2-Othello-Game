@@ -1,0 +1,21 @@
+function print_plane(plane)
+
+    for row_no from 1 to len(plane)
+        set seats = plane[row_no - 1]
+
+        for seat_no from 1 to 6
+            print seats[seat_no - 1]
+
+            if seat_no == 3 then
+                print "  |  "
+            else
+                print " "
+            end if
+        end for
+
+        print new line
+
+        if row_no == 10 then
+            print " emergency exit "
+        end if
+    end for

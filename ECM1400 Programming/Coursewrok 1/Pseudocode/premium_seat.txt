@@ -1,0 +1,70 @@
+function print_plane(plane)
+
+    set row_letters [a b c d e f g h i j k l m n o p q r]
+
+    print 1 2 3   4 5 6 #print the seat number on the top of the representation
+
+    for row_no from 1 to len(plane)
+        set seats = plane[row_no - 1]
+        set row_letter = row_letters[row_no - 1] 
+
+        print row_letter + ' ' #print the row letter on the left of the representation
+
+        for seat_no from 1 to 6
+            print seats[seat_no - 1]
+
+            if seat_no == 3 then
+                print '  |  '
+            else
+                print ' ' 
+            end if
+        end for
+
+        print new line
+
+        if row_no == 10 then
+            print 'emergency exit'
+        end if
+    end for
+
+end function
+
+
+
+module premium_seat(plane)
+
+    set row_letters [a b c d e f g h i j k l m n o p q r]
+
+    print premium seat selection
+
+    call print_plane(plane)
+
+    input 'where do you want to seat?:' #enter number like a1, b2, c3
+
+    set row_letter = first character of seat_choice
+    set seat_number = remaining characters of seat_choice
+    set row_no = position of row_letter in row_letters
+
+    if plane[row_index][seat_number - 1] is not empty then
+        print 'sorry, the chosen seat is unavaliable.'
+        return
+    end if
+
+    plane[row_index][seat_number - 1] = premium_seat
+
+    print 'selection of drinks: tea, coffee, fruit juice, champagne'
+    input 'what do you want to drink?:'
+
+    if drink_choice = champagne then
+        input 'please enter your age:'
+        if age < 18 then
+            print 'sorry, you must be over 18 to select alcohol drinks.'
+            set drink_choice = fruit juice
+        end if
+    end if
+
+    print 'Selected drink:' + drink_choice
+
+    call print_plane(plane)
+
+end module

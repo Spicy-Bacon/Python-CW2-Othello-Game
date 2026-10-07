@@ -1,0 +1,73 @@
+set plane = create_plane()
+    set total_seats = 108
+
+    set booked_seats = 0
+
+    while booked_seats < total_seats
+
+        print '       airline booking system'
+        print_plane(plane)
+
+        input 'Number of passengers: '
+
+        if num_passengers < 1 then
+            print 'there must be at least one passenger'
+            continue
+        end if
+
+        if booked_seats + num_passengers > total_seats then
+            print 'Sorry, there are not enough seats at this momnet.'
+            continue
+        end if
+
+        print 'select your booking type:'
+        print '1. standard seat'
+        print '2. premium seat'
+        input 'type 1 or 2:'
+
+        if seat_type == 1 then
+            call seat_chooser(plane, num_passengers)
+        else if seat_type == 2 then
+            call premium_seat(plane)
+        else
+            print 'invalid option'
+            continue
+        end if
+
+        for each row in plane
+            for each seat in row
+                if seat != 'empty'
+                    booked_seats = booked_seats + 1
+                end if
+            end for
+        end for
+
+        print 'ticket confirmation'
+        if seat_type == 1 then
+            print 'standard'
+        else
+            print 'premium'
+        end if
+
+        print 'passengers: ' + num_passengers
+
+        print 'your seats: '
+        set row_letters = [a b c d e f g h i j k l m n o p q r]
+        for row from 1 to length(plane)
+            for s from 1 to 6
+                if plane[r - 1][s - 1] != 'empty'
+                    print row_letters[r - 1] + s
+                end if
+            end for
+        end for
+
+        print 'your booking has been confirmed!'
+
+        if booked_seats == total_seats then
+            print 'Sorry, there are no tickets avaliable for this flight'
+            break
+        end if
+
+    end while
+
+end module
